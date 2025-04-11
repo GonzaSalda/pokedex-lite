@@ -17,6 +17,12 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/pokemons']); 
+    }
+  }
+
   login() {
     if (this.authService.login(this.username, this.password)) {
       this.router.navigate(['/pokemons']).then(() => {

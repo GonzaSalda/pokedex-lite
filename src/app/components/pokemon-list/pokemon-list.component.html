@@ -1,2 +1,9 @@
-<p>pokemon-list works!</p>
-
+<h2>Pokédex</h2>
+<ul>
+  <li *ngFor="let pokemon of pokemons">
+    <h3>{{ pokemon.name | titlecase }}</h3>
+    <p><strong>Type(s):</strong> {{ pokemon.types?.join(', ') }}</p>
+    <p><strong>Level:</strong> {{ pokemon.level }}</p>
+    <img [src]="pokemon.image" alt="{{ pokemon.name }}" />
+  </li>
+</ul>
