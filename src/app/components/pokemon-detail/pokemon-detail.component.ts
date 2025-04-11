@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PokemonService } from '../../services/pokemon.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-pokemon-detail',
@@ -17,14 +18,19 @@ export class PokemonDetailComponent {
   constructor(
     private route: ActivatedRoute,
     private pokemonService: PokemonService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
   ngOnInit() {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/']);
+      return;
+    }
+
     const name = this.route.snapshot.paramMap.get('name');
     if (name) {
       this.loadPokemonDetails(name);
-      this.loadEvolutions(name);
     }
   }
 
@@ -34,46 +40,22 @@ export class PokemonDetailComponent {
 
     if (foundPokemon) {
       this.pokemon = foundPokemon;
-      this.pokemon.typesString = this.pokemon.types.join(', '); 
+      this.evolutions = this.pokemon.evolutions || [];
     } else {
       this.pokemonService.getPokemonDetails(name).subscribe({
         next: (data) => {
           this.pokemon = {
             name: data.name,
             types: data.types.map((t: any) => t.type.name),
-            typesString: data.types.map((t: any) => t.type.name).join(', '), 
+            typesString: data.types.map((t: any) => t.type.name).join(', '),
             level: data.base_experience,
             image: data.sprites.other['official-artwork'].front_default,
             abilities: data.abilities.map((a: any) => a.ability.name),
+            evolutions: [],
           };
         },
         error: (err) => console.error('Error fetching details:', err),
       });
-    }
-  }
-
-  loadEvolutions(name: string) {
-    this.pokemonService.getPokemonSpecies(name).subscribe({
-      next: (species) => {
-        this.pokemonService
-          .getEvolutionChain(species.evolution_chain.url)
-          .subscribe({
-            next: (data) => {
-              this.extractEvolutions(data.chain);
-            },
-            error: (err) => console.error('Error fetching details:', err),
-          });
-      },
-      error: (err) => console.error('Error fetching details:', err),
-    });
-  }
-
-  extractEvolutions(chain: any) {
-    this.evolutions = [];
-    let current = chain;
-    while (current) {
-      this.evolutions.push(current.species.name);
-      current = current.evolves_to.length ? current.evolves_to[0] : null;
     }
   }
 

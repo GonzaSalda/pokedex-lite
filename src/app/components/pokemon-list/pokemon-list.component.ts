@@ -71,12 +71,41 @@ export class PokemonListComponent {
             level: item.base_experience,
             image: item.sprites.other['official-artwork'].front_default,
             abilities: item.abilities.map((a: any) => a.ability.name),
+            evolutions: [],
           };
+
+          this.pokemonService.getPokemonSpecies(item.name).subscribe({
+            next: (species) => {
+              this.pokemonService
+                .getEvolutionChain(species.evolution_chain.url)
+                .subscribe({
+                  next: (data) => {
+                    this.extractEvolutions(data.chain, index); 
+                  },
+                  error: (err) =>
+                    console.error('Error fetching evolution chain:', err),
+                });
+            },
+            error: (err) =>
+              console.error('Error fetching species details:', err),
+          });
+
           localStorage.setItem('pokemons', JSON.stringify(this.pokemons));
         },
         error: (err) => console.error('Error fetching details:', err),
       });
     });
+  }
+
+  extractEvolutions(chain: any, index: number) {
+    const evolutions: string[] = [];
+    let current = chain;
+    while (current) {
+      evolutions.push(current.species.name);
+      current = current.evolves_to.length ? current.evolves_to[0] : null;
+    }
+    this.pokemons[index].evolutions = evolutions; 
+    localStorage.setItem('pokemons', JSON.stringify(this.pokemons)); 
   }
 
   getTypeColor(type: string): string {

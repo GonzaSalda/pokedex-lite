@@ -1,6 +1,6 @@
 <nav class="bg-[#E86E30] p-6 flex justify-between" *ngIf="isLoggedIn">
     <div class="flex justify-center gap-x-4 text-white font-medium">
-        <a class="cursor-pointer" routerLink="/pokemons">Pokedex</a>
+        <button class="cursor-pointer" (click)="goToHome()">Pokedex</button>
         <p>Welcome {{ user }}</p>
     </div>
 

@@ -19,6 +19,10 @@ export class HeaderComponent {
     this.isLoggedIn = this.authService.isLoggedIn();
   }
 
+  goToHome() {
+    this.router.navigate(['/pokemons']);  // Redirige programáticamente
+  }
+
   logout() {
     this.authService.logout();
     this.isLoggedIn = false;

@@ -7,6 +7,5 @@ export const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'pokemons', component: PokemonListComponent },
   { path: 'pokemon/:name', component: PokemonDetailComponent },
-  { path: 'pokemon/edit/:name', component: PokemonEditComponent }, 
-
+  { path: 'pokemon/edit/:name', component: PokemonEditComponent },
 ];

@@ -3,13 +3,13 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-pokemon-edit',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './pokemon-edit.component.html',
-  styleUrl: './pokemon-edit.component.css',
 })
 export class PokemonEditComponent {
   pokemon: any = { name: '', level: 0, types: [], abilities: [] };
@@ -17,9 +17,18 @@ export class PokemonEditComponent {
   newType: string = '';
   newAbility: string = '';
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/']);
+      return;
+    }
+
     const name = this.route.snapshot.paramMap.get('name');
     if (name) {
       const storedPokemons = JSON.parse(
@@ -30,8 +39,9 @@ export class PokemonEditComponent {
         this.pokemon = {
           ...foundPokemon,
           types: Array.isArray(foundPokemon.types) ? foundPokemon.types : [],
-          abilities: Array.isArray(foundPokemon.abilities) ? foundPokemon.abilities : [],
-
+          abilities: Array.isArray(foundPokemon.abilities)
+            ? foundPokemon.abilities
+            : [],
         };
         this.originalName = foundPokemon.name;
       }
@@ -51,10 +61,10 @@ export class PokemonEditComponent {
   addAbility() {
     if (this.newAbility.trim()) {
       if (!Array.isArray(this.pokemon.abilities)) {
-        this.pokemon.abilities = []; // Asegurar que sea un array
+        this.pokemon.abilities = [];
       }
       this.pokemon.abilities.push(this.newAbility.trim());
-      this.newAbility = ''; 
+      this.newAbility = '';
     }
   }
 
@@ -71,11 +81,10 @@ export class PokemonEditComponent {
     if (index !== -1) {
       storedPokemons[index] = {
         ...this.pokemon,
-         types: [...this.pokemon.types],  // Asegurar que siga siendo array
-      abilities: [...this.pokemon.abilities],  // Guardar correctamente habilidades
+        types: [...this.pokemon.types],
+        abilities: [...this.pokemon.abilities],
       };
 
-      // Si el nombre cambió, actualizar la clave en localStorage
       if (this.originalName !== this.pokemon.name) {
         storedPokemons.splice(index, 1);
         storedPokemons.push(this.pokemon);
