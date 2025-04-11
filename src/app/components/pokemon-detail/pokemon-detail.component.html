@@ -3,12 +3,6 @@
         <h2 class="text-3xl font-bold text-center capitalize">{{ pokemon.name }}</h2>
         <img [src]="pokemon.image" [alt]="pokemon.name" class="w-48 h-48 mx-auto my-4">
 
-        <div class="flex flex-wrap justify-center gap-2">
-            <span *ngFor="let type of pokemon.types" class="px-3 py-1 rounded text-black text-sm font-medium">
-                {{ type }}
-            </span>
-        </div>
-
         <p class="text-lg mt-4"><strong>Level:</strong> {{ pokemon.level }}</p>
 
         <h3 class="text-xl font-semibold mt-4">Abilities</h3>
@@ -22,5 +16,9 @@
                 <span> {{ evolution | titlecase }}</span>
             </li>
         </ul>
+
+        <button (click)="editPokemon()" class="bg-blue-500 text-white px-4 py-2 rounded mt-4 w-full">
+            Editar Pokémon
+        </button>
     </div>
 </div>

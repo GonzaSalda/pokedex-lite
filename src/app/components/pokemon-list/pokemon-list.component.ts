@@ -14,24 +14,24 @@ export class PokemonListComponent {
   pokemons: any[] = [];
 
   typeColors: { [key: string]: string } = {
-    fire: "bg-red-500",
-    water: "bg-blue-500",
-    grass: "bg-green-500",
-    electric: "bg-yellow-500",
-    psychic: "bg-purple-500",
-    ice: "bg-cyan-500",
-    fighting: "bg-orange-600",
-    ground: "bg-yellow-700",
-    flying: "bg-indigo-400",
-    poison: "bg-purple-700",
-    bug: "bg-lime-600",
-    rock: "bg-gray-700",
-    ghost: "bg-indigo-700",
-    dragon: "bg-violet-600",
-    dark: "bg-gray-800",
-    steel: "bg-gray-500",
-    fairy: "bg-pink-400",
-    normal: "bg-gray-400",
+    fire: 'bg-red-500',
+    water: 'bg-blue-500',
+    grass: 'bg-green-500',
+    electric: 'bg-yellow-500',
+    psychic: 'bg-purple-500',
+    ice: 'bg-cyan-500',
+    fighting: 'bg-orange-600',
+    ground: 'bg-yellow-700',
+    flying: 'bg-indigo-400',
+    poison: 'bg-purple-700',
+    bug: 'bg-lime-600',
+    rock: 'bg-gray-700',
+    ghost: 'bg-indigo-700',
+    dragon: 'bg-violet-600',
+    dark: 'bg-gray-800',
+    steel: 'bg-gray-500',
+    fairy: 'bg-pink-400',
+    normal: 'bg-gray-400',
   };
 
   constructor(
@@ -46,13 +46,19 @@ export class PokemonListComponent {
       return;
     }
 
-    this.pokemonService.getPokemonList(10).subscribe({
-      next: (data) => {
-        this.pokemons = data.results;
-        this.loadPokemonDetails();
-      },
-      error: (err) => console.error('Error fetching Pokémon:', err),
-    });
+    const storedPokemons = JSON.parse(localStorage.getItem('pokemons') || '[]');
+
+    if (storedPokemons.length > 0) {
+      this.pokemons = storedPokemons;
+    } else {
+      this.pokemonService.getPokemonList(10).subscribe({
+        next: (data) => {
+          this.pokemons = data.results;
+          this.loadPokemonDetails();
+        },
+        error: (err) => console.error('Error fetching Pokémon:', err),
+      });
+    }
   }
 
   loadPokemonDetails() {
@@ -64,7 +70,9 @@ export class PokemonListComponent {
             types: item.types.map((t: any) => t.type.name),
             level: item.base_experience,
             image: item.sprites.other['official-artwork'].front_default,
+            abilities: item.abilities.map((a: any) => a.ability.name),
           };
+          localStorage.setItem('pokemons', JSON.stringify(this.pokemons));
         },
         error: (err) => console.error('Error fetching details:', err),
       });
@@ -72,6 +80,6 @@ export class PokemonListComponent {
   }
 
   getTypeColor(type: string): string {
-    return this.typeColors[type] || "bg-gray-500";
+    return this.typeColors[type] || 'bg-gray-500';
   }
 }
