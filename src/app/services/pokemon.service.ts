@@ -13,8 +13,16 @@ export class PokemonService {
   getPokemonList(limit: number = 10): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}?limit=${limit}`);
   }
-  
+
   getPokemonDetails(name: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/${name}`);
+  }
+
+  getPokemonSpecies(name: string): Observable<any> {
+    return this.http.get(`https://pokeapi.co/api/v2/pokemon-species/${name}`);
+  }
+  
+  getEvolutionChain(url: string): Observable<any> {
+    return this.http.get(url);
   }
 }

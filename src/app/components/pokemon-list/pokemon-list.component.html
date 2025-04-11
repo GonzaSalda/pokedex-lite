@@ -1,6 +1,6 @@
 <div class="min-h-screen bg-gray-100 p-6">
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-    <div *ngFor="let pokemon of pokemons"
+    <div *ngFor="let pokemon of pokemons" [routerLink]="'/pokemon/' + pokemon.name"
       class="cursor-pointer bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-4">
       <h3 class="text-lg font-semibold">{{ pokemon.name | titlecase }}</h3>
 
@@ -10,9 +10,7 @@
           {{ type }}
         </span>
       </div>
-      <div class="flex items-center justify-center">
-        <img [src]="pokemon.image" alt="{{ pokemon.name }}" class="w-32 h-32 object-contain rounded mt-2">
-      </div>
+      <img [src]="pokemon.image" alt="{{ pokemon.name }}" class="w-32 h-32 object-contain rounded mt-2 mx-auto">
       <div class="text-sm text-gray-500  pt-4 mt-4">
         Level: {{ pokemon.level }}
       </div>

@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { PokemonService } from '../../services/pokemon.service';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-pokemon-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './pokemon-list.component.html',
 })
 export class PokemonListComponent {
@@ -63,7 +63,7 @@ export class PokemonListComponent {
             name: item.name,
             types: item.types.map((t: any) => t.type.name),
             level: item.base_experience,
-            image: item.sprites.front_default,
+            image: item.sprites.other['official-artwork'].front_default,
           };
         },
         error: (err) => console.error('Error fetching details:', err),
