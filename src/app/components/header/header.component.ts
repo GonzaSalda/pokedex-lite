@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
+  user = localStorage.getItem('user')
   isLoggedIn = false;
 
   constructor(private authService: AuthService, private router: Router) {}
