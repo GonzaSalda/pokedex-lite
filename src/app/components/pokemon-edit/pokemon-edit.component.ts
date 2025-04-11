@@ -12,9 +12,10 @@ import { Router } from '@angular/router';
   styleUrl: './pokemon-edit.component.css',
 })
 export class PokemonEditComponent {
-  pokemon: any = { name: '', level: 0, types: '' };
+  pokemon: any = { name: '', level: 0, types: [], abilities: [] };
   originalName: string = '';
   newType: string = '';
+  newAbility: string = '';
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -29,6 +30,8 @@ export class PokemonEditComponent {
         this.pokemon = {
           ...foundPokemon,
           types: Array.isArray(foundPokemon.types) ? foundPokemon.types : [],
+          abilities: Array.isArray(foundPokemon.abilities) ? foundPokemon.abilities : [],
+
         };
         this.originalName = foundPokemon.name;
       }
@@ -45,6 +48,20 @@ export class PokemonEditComponent {
     this.pokemon.types.splice(index, 1);
   }
 
+  addAbility() {
+    if (this.newAbility.trim()) {
+      if (!Array.isArray(this.pokemon.abilities)) {
+        this.pokemon.abilities = []; // Asegurar que sea un array
+      }
+      this.pokemon.abilities.push(this.newAbility.trim());
+      this.newAbility = ''; 
+    }
+  }
+
+  removeAbility(index: number) {
+    this.pokemon.abilities.splice(index, 1);
+  }
+
   saveChanges() {
     let storedPokemons = JSON.parse(localStorage.getItem('pokemons') || '[]');
     const index = storedPokemons.findIndex(
@@ -54,18 +71,19 @@ export class PokemonEditComponent {
     if (index !== -1) {
       storedPokemons[index] = {
         ...this.pokemon,
-        types: this.pokemon.types, 
+         types: [...this.pokemon.types],  // Asegurar que siga siendo array
+      abilities: [...this.pokemon.abilities],  // Guardar correctamente habilidades
       };
 
       // Si el nombre cambió, actualizar la clave en localStorage
       if (this.originalName !== this.pokemon.name) {
-        storedPokemons.splice(index, 1); 
+        storedPokemons.splice(index, 1);
         storedPokemons.push(this.pokemon);
       }
 
       localStorage.setItem('pokemons', JSON.stringify(storedPokemons));
     }
 
-    this.router.navigate(['/pokemon', this.pokemon.name]); 
+    this.router.navigate(['/pokemon', this.pokemon.name]);
   }
 }

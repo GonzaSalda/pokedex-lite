@@ -1,30 +1,68 @@
 <div class="container mx-auto px-4 py-8">
-    <div class="flex gap-x-4">
-        <div class="w-[50%] bg-white p-6 rounded-lg shadow-lg mt-4">
-            <label class="block text-lg font-semibold mt-4">Name</label>
-            <input type="text" [(ngModel)]="pokemon.name" class="border rounded p-2 w-full">
+    <!-- Info -->
+    <div class="w-full bg-white p-6 rounded-lg shadow-lg mt-4">
+        <h1 class="block text-lg font-semibold mt-4">Information</h1>
+        <label class="block text-md font-normal mt-4">Name</label>
+        <input type="text" [(ngModel)]="pokemon.name"
+            class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]">
 
-            <label class="block text-lg font-semibold mt-4">Nivel</label>
-            <input type="number" [(ngModel)]="pokemon.level" class="border rounded p-2 w-full">
+        <label class="block text-md font-normal mt-4">Level</label>
+        <input type="number" [(ngModel)]="pokemon.level"
+            class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]">
 
-            <label class="block text-lg font-semibold mt-4">Tipos</label>
-            <div class="py-2">
-                <span *ngFor="let type of pokemon.types; let i = index"
-                    class="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-sm mr-2">
-                    {{ type }}
-                    <button (click)="removeType(i)" class="ml-1 text-red-500">&times;</button>
-                </span>
-            </div>
-
-            <input type="text" [(ngModel)]="newType" class="border rounded p-2 w-full" placeholder="Agregar tipo">
-            <button (click)="addType()" class="bg-blue-500 text-white px-2 py-1 rounded mt-2">Agregar</button>
+        <label class="block text-md font-normal mt-4">Types</label>
+        <div class="py-2">
+            <span *ngFor="let type of pokemon.types; let i = index"
+                class="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-sm mr-2">
+                {{ type }}
+                <button (click)="removeType(i)" class="ml-1 text-red-500">&times;</button>
+            </span>
         </div>
+
+        <input type="text" [(ngModel)]="newType" class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]"
+            placeholder="Add type">
+        <button (click)="addType()" class="bg-[#E86E30] cursor-pointer  text-white px-2 py-1 rounded mt-2">Add</button>
     </div>
 
+    <!-- Habilidades -->
+    <div class="w-full bg-white p-6 rounded-lg shadow-lg mt-4">
+        <h1 class="block text-lg font-semibold mt-4">Abilities</h1>
+        <div class="py-2">
+            <span *ngFor="let ability of pokemon.abilities; let i = index"
+                class="bg-blue-500 text-white px-2 py-1 rounded-full text-sm mr-2">
+                {{ ability }}
+                <button (click)="removeAbility(i)" class="ml-1 text-white">&times;</button>
+            </span>
+        </div>
 
-    <div>
-        <button (click)="saveChanges()" class="bg-green-500 text-white px-4 py-2 rounded mt-4 w-full">
-            Guardar Cambios
+        <input type="text" [(ngModel)]="newAbility" class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]"
+            placeholder="Nueva habilidad">
+        <button (click)="addAbility()" class="bg-[#E86E30] cursor-pointer text-white px-2 py-1 rounded mt-2">Add</button>
+
+    </div>
+
+        <!-- Evoluciones -->
+<!--         <div class="w-full bg-white p-6 rounded-lg shadow-lg mt-4">
+            <h1 class="block text-lg font-semibold mt-4">Evolution</h1>
+            <div class="py-2">
+                <span *ngFor="let ability of pokemon.abilities; let i = index"
+                    class="bg-blue-500 text-white px-2 py-1 rounded-full text-sm mr-2">
+                    {{ ability }}
+                    <button (click)="removeAbility(i)" class="ml-1 text-white">&times;</button>
+                </span>
+            </div>
+    
+            <input type="text" [(ngModel)]="newAbility" class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]"
+                placeholder="Nueva habilidad">
+            <button (click)="addAbility()" class="bg-[#E86E30] cursor-pointer text-white px-2 py-1 rounded mt-2">Add</button>
+    
+        </div> -->
+
+
+
+    <div class="flex justify-end">
+        <button (click)="saveChanges()" class=" cursor-pointer bg-green-500 text-white px-4 py-2 rounded mt-4">
+            Save
         </button>
     </div>
 </div>
