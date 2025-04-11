@@ -1,9 +1,23 @@
-<h2>Pokédex</h2>
-<ul>
-  <li *ngFor="let pokemon of pokemons">
-    <h3>{{ pokemon.name | titlecase }}</h3>
-    <p><strong>Type(s):</strong> {{ pokemon.types?.join(', ') }}</p>
-    <p><strong>Level:</strong> {{ pokemon.level }}</p>
-    <img [src]="pokemon.image" alt="{{ pokemon.name }}" />
-  </li>
-</ul>
+<div class="min-h-screen bg-gray-100 p-6">
+  <h2 class="text-2xl font-bold mb-6">Pokedex</h2>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    <div *ngFor="let pokemon of pokemons"
+      class="cursor-pointer bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-4">
+      <h3 class="text-lg font-semibold">{{ pokemon.name | titlecase }}</h3>
+
+      <div class="flex flex-wrap gap-2 mt-2">
+        <span *ngFor="let type of pokemon.types" [ngClass]="getTypeColor(type)"
+          class="px-2 py-1 rounded text-black text-sm font-medium">
+          {{ type }}
+        </span>
+      </div>
+      <div class="flex items-center justify-center">
+        <img [src]="pokemon.image" alt="{{ pokemon.name }}" class="w-32 h-32 object-contain rounded mt-2">
+      </div>
+      <div class="text-sm text-gray-500  pt-4 mt-4">
+        Nivel: {{ pokemon.level }}
+      </div>
+    </div>
+  </div>
+</div>
