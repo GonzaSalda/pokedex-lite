@@ -1,4 +1,4 @@
-<nav class="bg-gray-400" *ngIf="isLoggedIn">
+<nav class="bg-[#E86E30] p-6 flex justify-between" *ngIf="isLoggedIn">
     <a routerLink="/pokemons">Pokedex</a>
-    <button (click)="logout()">Cerrar Sesión</button>
+    <button (click)="logout()" class="font-medium text-[#E86E30] bg-white rounded-4xl px-4 text-center transition-transform transform hover:scale-95 cursor-pointer">Logout</button>
 </nav>
