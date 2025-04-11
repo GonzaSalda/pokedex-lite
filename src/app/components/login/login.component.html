@@ -5,7 +5,7 @@
       class="w-full p-2 border text-gray-500 border-gray-300 outline-[#E86E30] rounded mb-2" />
     <input type="password" [(ngModel)]="password" placeholder="Password"
       class="w-full p-2 border text-gray-500 border-gray-300 outline-[#E86E30] rounded mb-4 " />
-    <button (click)="login()" class="w-full bg-[#E86E30] text-white py-2 rounded hover:bg-[#E86E30]/90 ">
+    <button (click)="login()" class="cursor-pointer w-full bg-[#E86E30] text-white py-2 rounded hover:bg-[#E86E30]/90 ">
       Login
     </button>
     <p *ngIf="errorMessage" class="text-red-500 mt-2">{{ errorMessage }}</p>
