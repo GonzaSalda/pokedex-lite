@@ -1,36 +1,63 @@
 <div class="container mx-auto px-4 py-8">
-    <div *ngIf="pokemon" class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg mt-4">
-        <h2 class="text-3xl font-bold text-center capitalize">{{ pokemon.name }}</h2>
-        <img [src]="pokemon.image" [alt]="pokemon.name" class="w-48 h-48 mx-auto my-4">
+    <div *ngIf="pokemon" class="max-w-3xl mx-auto bg-white p-6 rounded-2xl shadow-lg mt-4">
+        <h2 class="text-4xl font-bold text-center capitalize text-[#333]">{{ pokemon.name }}</h2>
 
-        <div class="flex flex-wrap gap-2 mt-2 justify-center">
-            <span *ngFor="let type of pokemon.types"
-                class="px-2 py-1 rounded-2xl text-black text-sm font-medium hover:bg-[#E86E30]">
+        <img [src]="pokemon.image" [alt]="pokemon.name"
+            class="w-40 h-40 sm:w-48 sm:h-48 mx-auto my-4 object-contain drop-shadow" />
+
+        <div class="flex flex-wrap justify-center gap-2 mt-4">
+            <span *ngFor="let type of pokemon.types" [ngClass]="getTypeColor(type)"
+                class="px-4 py-1 rounded-full text-white text-sm font-semibold shadow-sm hover:scale-105 transition-transform duration-200">
                 {{ type }}
             </span>
         </div>
 
-        <p class="text-lg mt-4"><strong>Level:</strong> {{ pokemon.level }}</p>
+        <p class="text-lg text-center mt-4 font-medium text-gray-700">
+            Level: <span class="text-[#E86E30] font-bold">{{ pokemon.level }}</span>
+        </p>
 
-        <h3 class="text-xl font-semibold mt-4">Abilities</h3>
-        <ul>
-            <li *ngFor="let ability of pokemon.abilities">{{ ability }}</li>
-        </ul>
+        <div class="flex flex-col gap-10 mt-8">
+            <!-- Abilities -->
+            <div>
+                <h3 class="text-xl font-semibold mb-4 text-[#E86E30] text-center">Abilities</h3>
+                <ul class="space-y-3">
+                    <li *ngFor="let ability of pokemon.abilities; let i = index"
+                        class="flex items-center gap-3 bg-gray-50 border border-gray-200 p-3 rounded-lg shadow-sm hover:bg-gray-100 transition">
+                        <span
+                            class="h-6 w-6 rounded-full bg-[#E86E30] text-white text-xs flex items-center justify-center font-bold">
+                            {{ i + 1 }}
+                        </span>
+                        <span class="text-gray-800 font-medium">{{ ability }}</span>
+                    </li>
+                </ul>
+            </div>
 
-        <h3 class="text-lg font-semibold mt-4">Evolutions:</h3>
-        <ul>
-            <li *ngFor="let evolution of pokemon.evolutions">
-                <span> {{ evolution.name | titlecase }}</span>
-                <span>{{ evolution.min_level }}</span>
-                <span *ngFor="let type of pokemon.types | slice:0:1"
-                    class="px-2 py-1 rounded-2xl text-black text-sm font-medium hover:bg-[#E86E30]">
-                    {{ type }}
-                </span>
-            </li>
-        </ul>
+            <!-- Evolutions -->
+            <div>
+                <h3 class="text-xl font-semibold mb-4 text-[#E86E30] text-center">Evolutions</h3>
+                <ul class="space-y-4">
+                    <li *ngFor="let evolution of pokemon.evolutions"
+                        class="bg-gray-50 border border-gray-200 p-4 rounded-lg shadow-sm">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-lg font-semibold capitalize text-gray-800">{{ evolution.name }}</span>
+                            <span class="text-sm bg-[#E86E30]/10 text-[#E86E30] px-3 py-1 rounded-full">
+                                Lvl Min: {{ evolution.min_level }}
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span *ngFor="let type of pokemon.types" [ngClass]="getTypeColor(type)"
+                                class="px-3 py-1 rounded-2xl text-white text-xs font-medium shadow-sm">
+                                {{ type }}
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-        <button (click)="editPokemon()" class="bg-[#E86E30] cursor-pointer text-white px-4 py-2 rounded mt-4 w-full">
-            Edit Pokemon
+        <button (click)="editPokemon()"
+            class="bg-[#E86E30] hover:bg-orange-600 text-white px-6 py-3 rounded-xl mt-10 w-full text-lg font-semibold transition">
+            Edit Pokémon
         </button>
     </div>
 </div>
