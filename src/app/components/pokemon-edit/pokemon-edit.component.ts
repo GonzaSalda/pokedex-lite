@@ -12,7 +12,13 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './pokemon-edit.component.html',
 })
 export class PokemonEditComponent {
-  pokemon: any = { name: '', level: 0, types: [], abilities: [], evolutions: [] };
+  pokemon: any = {
+    name: '',
+    level: 0,
+    types: [],
+    abilities: [],
+    evolutions: [],
+  };
   originalName: string = '';
   newType: string = '';
   newAbility: string = '';
@@ -44,15 +50,20 @@ export class PokemonEditComponent {
           abilities: Array.isArray(foundPokemon.abilities)
             ? foundPokemon.abilities
             : [],
-          evolutions: Array.isArray(foundPokemon.evolutions) ? foundPokemon.evolutions
-          : [],
+          evolutions: Array.isArray(foundPokemon.evolutions)
+            ? foundPokemon.evolutions
+            : [],
         };
-        console.log(this.pokemon)
+        console.log(this.pokemon);
         this.originalName = foundPokemon.name;
       }
     }
   }
 
+  goToHome() {
+    this.router.navigate(['/']);
+  }
+  
   addType() {
     if (this.newType.trim()) {
       this.pokemon.types.push(this.newType.trim().toLowerCase());
@@ -73,7 +84,6 @@ export class PokemonEditComponent {
     }
   }
 
-
   removeAbility(index: number) {
     this.pokemon.abilities.splice(index, 1);
   }
@@ -82,14 +92,14 @@ export class PokemonEditComponent {
     if (this.newEvolution.trim()) {
       this.pokemon.evolutions.push({
         name: this.newEvolution.trim().toLowerCase(),
-        min_level: this.newEvolutionLevel ?? 'unknown' 
+        min_level: this.newEvolutionLevel ?? 'unknown',
       });
       this.newEvolution = '';
       this.newEvolutionLevel = null;
     }
   }
 
-  removeEvolution(index: number){
+  removeEvolution(index: number) {
     this.pokemon.evolutions.splice(index, 1);
   }
 

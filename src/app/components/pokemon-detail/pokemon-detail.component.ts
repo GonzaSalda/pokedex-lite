@@ -55,6 +55,10 @@ export class PokemonDetailComponent {
     }
   }
 
+  goToHome(){
+    this.router.navigate(['/']);
+  }
+
   loadPokemonDetails(name: string) {
     const storedPokemons = JSON.parse(localStorage.getItem('pokemons') || '[]');
     const foundPokemon = storedPokemons.find((p: any) => p.name === name);

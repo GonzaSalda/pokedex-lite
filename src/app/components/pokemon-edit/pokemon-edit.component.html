@@ -1,4 +1,4 @@
-<div class="w-full md:w-[70%] mx-auto  px-4 py-8">
+<div class="w-full md:w-[70%] mx-auto px-4 py-8">
     <div class=" bg-white p-6 rounded-lg shadow-lg mt-4">
         <h1 class="block text-lg font-semibold mt-4">Information</h1>
         <label class="block text-md font-normal mt-4">Name</label>
@@ -22,7 +22,14 @@
             <input type="text" [(ngModel)]="newType" class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]"
                 placeholder="Add type">
             <button (click)="addType()"
-                class="bg-[#E86E30] cursor-pointer  text-white px-4 py-2 rounded whitespace-nowrap ">+</button>
+                class="bg-[#E86E30] hover:bg-orange-600 transition cursor-pointer  text-white px-4 py-2 rounded whitespace-nowrap "><svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-circle-plus-icon lucide-circle-plus">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M8 12h8" />
+                    <path d="M12 8v8" />
+                </svg></button>
         </div>
 
     </div>
@@ -41,7 +48,14 @@
             <input type="text" [(ngModel)]="newAbility"
                 class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]" placeholder="New ability">
             <button (click)="addAbility()"
-                class="bg-[#E86E30] cursor-pointer text-white px-4 py-2 rounded whitespace-nowrap">+</button>
+                class="bg-[#E86E30] hover:bg-orange-600 transition cursor-pointer text-white px-4 py-2 rounded whitespace-nowrap"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-circle-plus-icon lucide-circle-plus">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M8 12h8" />
+                    <path d="M12 8v8" />
+                </svg></button>
 
         </div>
 
@@ -63,14 +77,27 @@
             class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]" placeholder="Level">
 
         <button (click)="addEvolution()"
-            class="bg-[#E86E30] cursor-pointer text-white px-2 py-1 rounded mt-2">Add evolution</button>
+            class="bg-[#E86E30] hover:bg-orange-600 transition cursor-pointer text-white px-2 py-1 rounded mt-2">Add
+            evolution</button>
 
     </div>
 
 
 
-    <div class="flex justify-end">
-        <button (click)="saveChanges()" class=" cursor-pointer bg-[#E86E30] text-white px-4 py-2 rounded mt-4">
+    <div class="flex justify-end items-center gap-x-2 mt-2">
+        <button (click)="goToHome()" class="text-black cursor-pointer hover:bg-[#E86E30] hover:text-white  px-4 py-2 rounded-lg text-md
+        font-semibold transition">
+            Cancel</button>
+        <button (click)="saveChanges()"
+            class=" cursor-pointer bg-[#E86E30] hover:bg-orange-600 transition text-white px-2 py-2 rounded flex items-center gap-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-save-icon lucide-save">
+                <path
+                    d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" />
+                <path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7" />
+                <path d="M7 3v4a1 1 0 0 0 1 1h7" />
+            </svg>
             Save
         </button>
     </div>
