@@ -1,26 +1,26 @@
 <div class="container mx-auto px-4 py-8">
-    <div class="w-full bg-white p-6 rounded-lg shadow-lg mt-4">
-        <h2 class="text-3xl font-semibold text-center mb-6">Create new Pokemon</h2>
+    <div class="w-full md:w-[70%] mx-auto bg-white p-6 rounded-lg shadow-lg mt-4">
+        <h2 class="text-3xl font-semibold text-left mb-6">Create new Pokemon</h2>
 
-        <label class="block mb-2 ">Name:</label>
+        <label class="block mb-2 font-semibold">Name:</label>
         <input [(ngModel)]="pokemon.name" type="text" placeholder="Pokemon name"
             class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]" />
 
 
-        <label class="block mb-2 ">Image URL:</label>
+        <label class="block my-2 font-semibold">Image URL:</label>
         <input [(ngModel)]="pokemon.image" type="text" placeholder="https://..."
             class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]" />
 
-        <label class="block mb-2 ">Level:</label>
+        <label class="block my-2 font-semibold">Level:</label>
         <input [(ngModel)]="pokemon.level" type="number" min="1"
             class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]" />
 
-        <label class="block mb-2 ">Types:</label>
+        <label class="block my-2 font-semibold">Types:</label>
         <div class="flex gap-2 mb-4">
             <input [(ngModel)]="newType" type="text" class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]"
                 placeholder="Ej: grass" />
             <button (click)="addType()"
-                class=" text-white px-4 py-2 rounded bg-[#E86E30] hover:bg-orange-600 transition whitespace-nowrap">
+                class=" text-white px-4 py-2 rounded cursor-pointer bg-[#E86E30] hover:bg-orange-600 transition whitespace-nowrap">
                 Add type
             </button>
         </div>
@@ -33,12 +33,12 @@
         </div>
 
         <!-- Abilities -->
-        <label class="block mb-2 ">Abilities:</label>
+        <label class="block mb-2 font-semibold">Abilities:</label>
         <div class="flex gap-2 mb-4">
             <input [(ngModel)]="newAbility" type="text"
                 class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]" placeholder="Ej: overgrow" />
             <button (click)="addAbility()"
-                class="bg-blue-60 text-white px-3 py-1 rounded bg-[#E86E30] hover:bg-orange-600 transition whitespace-nowrap">
+                class="bg-blue-60 text-white px-3 py-1 rounded cursor-pointer bg-[#E86E30] hover:bg-orange-600 transition whitespace-nowrap">
                 Add ability
             </button>
         </div>
@@ -50,7 +50,7 @@
         </ul>
 
         <!-- Evolutions -->
-        <label class="block mb-2 ">Evolutions:</label>
+        <label class="block mb-2 font-semibold">Evolutions:</label>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
             <input [(ngModel)]="newEvolutionName" type="text"
                 class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]" placeholder="Evolution" />
@@ -58,7 +58,7 @@
                 class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]" placeholder="Lvl min" />
         </div>
         <button (click)="addEvolution()"
-            class="bg-[#E86E30] hover:bg-orange-600 transition text-white px-3 py-1 rounded mb-4 whitespace-nowrap">
+            class="bg-[#E86E30] hover:bg-orange-600 cursor-pointer transition text-white px-3 py-1 rounded mb-4 whitespace-nowrap">
             Add evolution
         </button>
         <ul class="space-y-2">
@@ -72,7 +72,7 @@
         </ul>
 
         <div class="flex justify-end">
-            <button (click)="savePokemon()" class="cursor-pointer bg-[#E86E30] text-white px-4 py-2 rounded mt-4">
+            <button (click)="savePokemon()" class="cursor-pointer bg-[#E86E30] hover:bg-orange-600 transition text-white px-4 py-2 rounded mt-4">
                 Save Pokemon
             </button>
         </div>

@@ -1,11 +1,11 @@
 <div class="container mx-auto px-4 py-8">
     <div *ngIf="pokemon" class="max-w-3xl mx-auto bg-white p-6 rounded-2xl shadow-lg mt-4">
-        <div class="flex justify-between">
-            <button class="bg-[#E86E30] cursor-pointer hover:bg-orange-600 text-white px-6 py-3 rounded-xl mt-10 text-lg
+        <div class="flex justify-between mb-2 md:mb-0">
+            <button class="text-black cursor-pointer hover:bg-[#E86E30] hover:text-white  px-6 py-1 rounded-lg text-md
                 font-semibold transition">
-                Back</button>
+                Back to pokedex</button>
             <button (click)="editPokemon()"
-                class="bg-[#E86E30] cursor-pointer hover:bg-orange-600 text-white px-6 py-3 rounded-xl mt-10 text-lg font-semibold transition">
+                class="bg-[#E86E30] cursor-pointer hover:bg-orange-600 text-white px-2 md:px-6 py-1 rounded-lg text-md font-semibold transition">
                 Edit Pokemon
             </button>
         </div>
