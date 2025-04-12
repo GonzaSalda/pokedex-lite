@@ -1,9 +1,13 @@
 <nav class="bg-[#E86E30] p-6 flex justify-between" *ngIf="isLoggedIn">
-    <div class="flex justify-center gap-x-4 text-white font-medium">
-        <button class="cursor-pointer" (click)="goToHome()">Pokedex</button>
-        <p>Welcome {{ user }}</p>
+    <div class="flex justify-center gap-x-4 py-2 text-white font-medium items-center">
+        <button class="cursor-pointer" (click)="goToHome()" class="font-bold text-4xl">Pokedex</button>
     </div>
 
-    <button (click)="logout()"
-        class="font-medium text-[#E86E30] bg-white rounded-4xl px-4 text-center transition-transform transform hover:scale-95 cursor-pointer">Logout</button>
+    <div class="flex gap-x-4">
+        <button (click)="createPokemon()" class=" font-medium text-[#E86E30] bg-white rounded-4xl px-4 text-center
+            transition-transform transform hover:scale-95 cursor-pointer">Create New Pokemon</button>
+        <button (click)="logout()"
+            class="font-medium text-[#E86E30] bg-white rounded-4xl px-4 text-center transition-transform transform hover:scale-95 cursor-pointer">Logout</button>
+    </div>
+
 </nav>

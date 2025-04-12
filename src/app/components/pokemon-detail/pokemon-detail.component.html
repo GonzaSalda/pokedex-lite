@@ -1,5 +1,15 @@
 <div class="container mx-auto px-4 py-8">
     <div *ngIf="pokemon" class="max-w-3xl mx-auto bg-white p-6 rounded-2xl shadow-lg mt-4">
+        <div class="flex justify-between">
+            <button class="bg-[#E86E30] cursor-pointer hover:bg-orange-600 text-white px-6 py-3 rounded-xl mt-10 text-lg
+                font-semibold transition">
+                Back</button>
+            <button (click)="editPokemon()"
+                class="bg-[#E86E30] cursor-pointer hover:bg-orange-600 text-white px-6 py-3 rounded-xl mt-10 text-lg font-semibold transition">
+                Edit Pokemon
+            </button>
+        </div>
+
         <h2 class="text-4xl font-bold text-center capitalize text-[#333]">{{ pokemon.name }}</h2>
 
         <img [src]="pokemon.image" [alt]="pokemon.name"
@@ -37,7 +47,7 @@
                 <h3 class="text-xl font-semibold mb-4 text-[#E86E30] text-center">Evolutions</h3>
                 <ul class="space-y-4">
                     <li *ngFor="let evolution of pokemon.evolutions"
-                        class="bg-gray-50 border border-gray-200 p-4 rounded-lg shadow-sm">
+                        class="bg-gray-50 border border-gray-200 p-4 rounded-lg shadow-sm hover:bg-gray-100 transition">
                         <div class="flex justify-between items-center mb-2">
                             <span class="text-lg font-semibold capitalize text-gray-800">{{ evolution.name }}</span>
                             <span class="text-sm bg-[#E86E30]/10 text-[#E86E30] px-3 py-1 rounded-full">
@@ -54,10 +64,5 @@
                 </ul>
             </div>
         </div>
-
-        <button (click)="editPokemon()"
-            class="bg-[#E86E30] hover:bg-orange-600 text-white px-6 py-3 rounded-xl mt-10 w-full text-lg font-semibold transition">
-            Edit Pokémon
-        </button>
     </div>
 </div>

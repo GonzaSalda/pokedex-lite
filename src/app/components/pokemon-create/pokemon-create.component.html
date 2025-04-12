@@ -1,0 +1,81 @@
+<div class="container mx-auto px-4 py-8">
+    <div class="w-full bg-white p-6 rounded-lg shadow-lg mt-4">
+        <h2 class="text-3xl font-semibold text-center mb-6">Create new Pokemon</h2>
+
+        <label class="block mb-2 ">Name:</label>
+        <input [(ngModel)]="pokemon.name" type="text" placeholder="Pokemon name"
+            class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]" />
+
+
+        <label class="block mb-2 ">Image URL:</label>
+        <input [(ngModel)]="pokemon.image" type="text" placeholder="https://..."
+            class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]" />
+
+        <label class="block mb-2 ">Level:</label>
+        <input [(ngModel)]="pokemon.level" type="number" min="1"
+            class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]" />
+
+        <label class="block mb-2 ">Types:</label>
+        <div class="flex gap-2 mb-4">
+            <input [(ngModel)]="newType" type="text" class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]"
+                placeholder="Ej: grass" />
+            <button (click)="addType()"
+                class=" text-white px-4 py-2 rounded bg-[#E86E30] hover:bg-orange-600 transition whitespace-nowrap">
+                Add type
+            </button>
+        </div>
+        <div class="flex flex-wrap gap-2 mb-4">
+            <span *ngFor="let type of pokemon.types; let i = index"
+                class="bg-gray-600 text-white px-3 py-1 rounded-full text-sm">
+                {{ type }}
+                <button (click)="removeType(i)" class="ml-1">&times;</button>
+            </span>
+        </div>
+
+        <!-- Abilities -->
+        <label class="block mb-2 ">Abilities:</label>
+        <div class="flex gap-2 mb-4">
+            <input [(ngModel)]="newAbility" type="text"
+                class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]" placeholder="Ej: overgrow" />
+            <button (click)="addAbility()"
+                class="bg-blue-60 text-white px-3 py-1 rounded bg-[#E86E30] hover:bg-orange-600 transition whitespace-nowrap">
+                Add ability
+            </button>
+        </div>
+        <ul class="list-disc list-inside mb-4">
+            <li *ngFor="let ability of pokemon.abilities; let i = index">
+                {{ ability }}
+                <button (click)="removeAbility(i)" class="text-red-500 ml-2">&times;</button>
+            </li>
+        </ul>
+
+        <!-- Evolutions -->
+        <label class="block mb-2 ">Evolutions:</label>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+            <input [(ngModel)]="newEvolutionName" type="text"
+                class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]" placeholder="Evolution" />
+            <input [(ngModel)]="newEvolutionLevel" type="number"
+                class="border rounded p-2 w-full border-gray-300 outline-[#E86E30]" placeholder="Lvl min" />
+        </div>
+        <button (click)="addEvolution()"
+            class="bg-[#E86E30] hover:bg-orange-600 transition text-white px-3 py-1 rounded mb-4 whitespace-nowrap">
+            Add evolution
+        </button>
+        <ul class="space-y-2">
+            <li *ngFor="let evo of pokemon.evolutions; let i = index" class="flex flex-col bg-gray-100 p-2 rounded">
+                <div class="flex justify-between items-center">
+                    <span class="font-medium">{{ evo.name | titlecase }}</span>
+                    <button (click)="removeEvolution(i)" class="text-red-500 text-xl leading-none">&times;</button>
+                </div>
+                <div class="text-sm text-gray-600">Lvl min: {{ evo.min_level }}</div>
+            </li>
+        </ul>
+
+        <div class="flex justify-end">
+            <button (click)="savePokemon()" class="cursor-pointer bg-[#E86E30] text-white px-4 py-2 rounded mt-4">
+                Save Pokemon
+            </button>
+        </div>
+
+    </div>
+</div>

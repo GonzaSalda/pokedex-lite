@@ -20,7 +20,11 @@ export class HeaderComponent {
   }
 
   goToHome() {
-    this.router.navigate(['/pokemons']);  // Redirige programáticamente
+    this.router.navigate(['/pokemons']); 
+  }
+
+  createPokemon() {
+    this.router.navigate(['/pokemon/create']);
   }
 
   logout() {
