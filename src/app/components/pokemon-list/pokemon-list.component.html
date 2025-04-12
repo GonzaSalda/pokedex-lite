@@ -6,11 +6,12 @@
 
       <div class="flex flex-wrap gap-2 mt-2">
         <span *ngFor="let type of pokemon.types" [ngClass]="getTypeColor(type)"
-          class="px-2 py-1 rounded-2xl text-white text-sm font-medium hover:bg-[#E86E30]">
+          class="px-4 py-1 rounded-full text-white text-sm font-semibold shadow-sm hover:scale-105 transition-transform duration-200">
           {{ type }}
         </span>
       </div>
-      <img [src]="pokemon.image" alt="{{ pokemon.name }}" class="w-32 h-32 object-contain rounded mt-2 mx-auto transition-transform duration-300 hover:scale-105">
+      <img [src]="pokemon.image" alt="{{ pokemon.name }}"
+        class="w-32 h-32 object-contain rounded mt-2 mx-auto transition-transform duration-300 hover:scale-105">
       <div class="text-sm text-gray-500  pt-4 mt-4">
         Level: {{ pokemon.level }}
       </div>
