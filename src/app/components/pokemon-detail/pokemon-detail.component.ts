@@ -13,7 +13,6 @@ import { AuthService } from '../../services/auth.service';
 })
 export class PokemonDetailComponent {
   pokemon: any;
-  evolutions: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -27,10 +26,12 @@ export class PokemonDetailComponent {
       this.router.navigate(['/']);
       return;
     }
+ 
 
     const name = this.route.snapshot.paramMap.get('name');
     if (name) {
       this.loadPokemonDetails(name);
+      console.log(this.pokemon)
     }
   }
 
@@ -40,7 +41,6 @@ export class PokemonDetailComponent {
 
     if (foundPokemon) {
       this.pokemon = foundPokemon;
-      this.evolutions = this.pokemon.evolutions || [];
     } else {
       this.pokemonService.getPokemonDetails(name).subscribe({
         next: (data) => {

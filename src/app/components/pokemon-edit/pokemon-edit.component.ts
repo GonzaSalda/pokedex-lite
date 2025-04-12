@@ -12,10 +12,11 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './pokemon-edit.component.html',
 })
 export class PokemonEditComponent {
-  pokemon: any = { name: '', level: 0, types: [], abilities: [] };
+  pokemon: any = { name: '', level: 0, types: [], abilities: [], evolutions: [] };
   originalName: string = '';
   newType: string = '';
   newAbility: string = '';
+  newEvolution: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -68,8 +69,20 @@ export class PokemonEditComponent {
     }
   }
 
+
   removeAbility(index: number) {
     this.pokemon.abilities.splice(index, 1);
+  }
+
+  addEvolution(){
+    if(this.newEvolution.trim()){
+      this.pokemon.evolutions.push(this.newEvolution.trim());
+      this.newEvolution = '';
+    }
+  }
+
+  removeEvolution(index: number){
+    this.pokemon.evolutions.splice(index, 1);
   }
 
   saveChanges() {
@@ -83,6 +96,7 @@ export class PokemonEditComponent {
         ...this.pokemon,
         types: [...this.pokemon.types],
         abilities: [...this.pokemon.abilities],
+        evolutions: [...this.pokemon.evolutions],
       };
 
       if (this.originalName !== this.pokemon.name) {
