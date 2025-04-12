@@ -17,6 +17,7 @@ export class PokemonEditComponent {
   newType: string = '';
   newAbility: string = '';
   newEvolution: string = '';
+  newEvolutionLevel: number | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -43,7 +44,10 @@ export class PokemonEditComponent {
           abilities: Array.isArray(foundPokemon.abilities)
             ? foundPokemon.abilities
             : [],
+          evolutions: Array.isArray(foundPokemon.evolutions) ? foundPokemon.evolutions
+          : [],
         };
+        console.log(this.pokemon)
         this.originalName = foundPokemon.name;
       }
     }
@@ -74,10 +78,14 @@ export class PokemonEditComponent {
     this.pokemon.abilities.splice(index, 1);
   }
 
-  addEvolution(){
-    if(this.newEvolution.trim()){
-      this.pokemon.evolutions.push(this.newEvolution.trim());
+  addEvolution() {
+    if (this.newEvolution.trim()) {
+      this.pokemon.evolutions.push({
+        name: this.newEvolution.trim().toLowerCase(),
+        min_level: this.newEvolutionLevel ?? 'unknown' 
+      });
       this.newEvolution = '';
+      this.newEvolutionLevel = null;
     }
   }
 

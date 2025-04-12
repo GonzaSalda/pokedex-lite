@@ -98,12 +98,20 @@ export class PokemonListComponent {
   }
 
   extractEvolutions(chain: any, index: number) {
-    const evolutions: string[] = [];
+    const evolutions: { name: string; min_level: number | string }[] = []; 
     let current = chain;
+    
     while (current) {
-      evolutions.push(current.species.name);
+      evolutions.push({
+        name: current.species.name,
+        min_level: current.evolution_details.length > 0
+          ? current.evolution_details[0].min_level
+          : (evolutions.length === 0 ? 1 : 'Unknown'), 
+      });
+  
       current = current.evolves_to.length ? current.evolves_to[0] : null;
     }
+  
     this.pokemons[index].evolutions = evolutions; 
     localStorage.setItem('pokemons', JSON.stringify(this.pokemons)); 
   }
