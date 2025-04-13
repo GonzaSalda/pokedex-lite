@@ -1,5 +1,5 @@
-<div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-  <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-sm text-center">
+<div class="flex flex-col items-center justify-center min-h-screen bg-gray-100 relative">
+  <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-sm text-center z-10">
     <h2 class="text-2xl font-bold mb-4">Pokedex - Lite</h2>
     <img class="w-20 h-20 mx-auto my-4" src="/poke.png" alt="">
     <input type="text" [(ngModel)]="username" placeholder="User"
@@ -11,4 +11,5 @@
     </button>
     <p *ngIf="errorMessage" class="text-red-500 mt-2">{{ errorMessage }}</p>
   </div>
+  <img class="absolute w-[380px] h-[280px] bottom-0 right-0 hidden md:block" src="/pokemons.png" alt="">
 </div>
