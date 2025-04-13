@@ -10,8 +10,8 @@ export class PokemonService {
 
   constructor(private http: HttpClient) {}
 
-  getPokemonList(limit: number = 10): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}?limit=${limit}`);
+  getPokemonList(limit: number = 10, offset: number = 0): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}?limit=${limit}&offset=${offset}`);
   }
 
   getPokemonDetails(name: string): Observable<any> {
@@ -21,7 +21,7 @@ export class PokemonService {
   getPokemonSpecies(name: string): Observable<any> {
     return this.http.get(`https://pokeapi.co/api/v2/pokemon-species/${name}`);
   }
-  
+
   getEvolutionChain(url: string): Observable<any> {
     return this.http.get(url);
   }
